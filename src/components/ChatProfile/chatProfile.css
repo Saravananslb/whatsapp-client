@@ -1,0 +1,40 @@
+.profile-pic {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.profile-grid-container {
+    display: grid;
+    grid-template-columns: 0.4fr 2fr;
+    padding: 10px 15px 0px 10px;
+    cursor: pointer;
+}
+
+.profile-grid-container:hover {
+    background: #F0F2F5;
+}
+
+.selected {
+    background: #F0F2F5;
+}
+
+.conversation-msg-view {
+    padding: 5px;
+}
+
+.username-conversation {
+    font: 17px segoe UI;
+    color: #111B21;
+}
+
+.conversation-time {
+    font-size: 12px;
+    color: #667781;
+    float: right;
+}
+
+.last-conversation {
+    color: #667781;
+    font-size: 14px;
+}

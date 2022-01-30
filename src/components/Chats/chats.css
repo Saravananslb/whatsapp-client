@@ -1,0 +1,23 @@
+.chats-container {
+    position: relative;
+    top: 20px;
+    padding: 10px;
+}
+
+.chat-time {
+    font-size: 11px;
+    position: relative;
+    padding-left: 10px;
+    top: 5px;
+}
+
+.chats {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    font-size: 13px;
+    padding-left: 3px;
+    padding-right: 3px;
+    background: #dbf1e2;
+}

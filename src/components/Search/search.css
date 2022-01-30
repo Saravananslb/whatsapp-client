@@ -1,0 +1,15 @@
+.search-container {
+    padding: 10px;
+    border: 1px solid #F0F2F5;
+    background: #F0F2F5;
+}
+
+.search-text {
+    background: transparent;
+    border: none;
+    margin-left: 10px;
+    width: 80%;
+    padding: 10px;
+    border-radius: 5px;
+    background: #F0F2F5;
+}

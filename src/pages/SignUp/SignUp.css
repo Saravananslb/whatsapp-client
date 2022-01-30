@@ -1,0 +1,44 @@
+.signin-container {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    /* text-align: center; */
+}
+
+.sign-in-fields {
+    padding: 10px;
+}
+
+.sign-in-fields input {
+    padding: 10px;
+    width: 350px;
+}
+
+.sign-in-fields button {
+    text-align: center;
+    padding: 10px;
+    width: 200px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.sign-in-fields button:hover {
+    background: #a0fab3;
+}
+
+.signin-subcontainer {
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.iconContainer {
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    background: rgb(140, 190, 190);
+    margin-left: 35%;
+  }

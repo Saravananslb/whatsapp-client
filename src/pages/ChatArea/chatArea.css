@@ -1,0 +1,21 @@
+.chat-area-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-type-container {
+    position: fixed;
+    padding: 10px 80px 10px 50px;
+    border-radius: 5px;
+    background: rgb(240, 242, 245);
+    width: 1000px;
+    bottom: 10px;
+}
+
+/* .chats-background-container {
+    background-image: url(../../assets/chat-background.png);
+    background-size: 100% 500px;
+    background-repeat: no-repeat;
+    background-attachment: fixed; */
+    /* background-size: cover; */
+/* } */

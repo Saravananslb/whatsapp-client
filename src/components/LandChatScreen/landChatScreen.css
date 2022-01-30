@@ -1,0 +1,11 @@
+.land-screen-container {
+    position: relative;
+    text-align: center;
+    top: 30px;
+}
+
+.whatsapp-web-text {
+    /* color: #41525D; */
+    color: #667781;
+    font-size: 32px;
+}

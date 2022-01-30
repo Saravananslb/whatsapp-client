@@ -1,0 +1,12 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 100px 300px;
+} 
+
+.chat-area-container {
+    background: red;
+}
+
+.side-area-container {
+    background: black;
+}
