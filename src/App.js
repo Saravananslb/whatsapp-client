@@ -6,6 +6,7 @@ import { Context } from "./store/Context";
 import { reducer } from "./store/reducer";
 import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";
+import { validateToken } from "./services/apiCall";
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,6 +19,9 @@ function App() {
     user: {},
     chatUser: {},
     isAuthenticated: false,
+    contactEnabled: false,
+    userContacts: [],
+    userContactsTemp: []
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);

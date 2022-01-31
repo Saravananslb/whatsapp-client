@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { Upload } from "react-bootstrap-icons";
+import { uploadImage, signUp, signIn } from "../../services/apiCall";
 import "./SignUp.css";
 
 export const SignUp = () => {
   const [users, setUsers] = useState({
-    phone: "",
+    number: "",
     password: "",
     name: "",
     profilePic: "",
-    confirmPasword: "",
+    confirmPassword: "",
+    about: ""
   });
 
   const [uploadedData, setUplodedData] = useState("");
@@ -34,6 +37,17 @@ export const SignUp = () => {
     setUplodedData("");
     setFormData("");
   };
+
+  const signUpUser = async(e) => {
+    e.preventDefault(false)
+    const upload = await uploadImage(formData);
+    if (upload.status == 200) {
+      setUsers({...users, profilePic: upload.data.image});
+      const userInfo = {...users, profilePic: upload.data.image}
+      const signup = await signUp(userInfo);
+    }
+    // console.log(signup)
+  }
 
   return (
     <div className="signin-container">
@@ -79,7 +93,7 @@ export const SignUp = () => {
               type="text"
               value={users.email}
               placeholder="Phone number"
-              onChange={(e) => setUsers({ ...users, phone: e.target.value })}
+              onChange={(e) => setUsers({ ...users, number: e.target.value })}
             />
           </div>
           <div className="sign-in-fields">
@@ -95,15 +109,26 @@ export const SignUp = () => {
             <div>Confirm Password</div>
             <input
               type="password"
-              value={users.password}
+              value={users.confirmPassword}
               placeholder="Confirm Password"
               onChange={(e) =>
-                setUsers({ ...users, confirmPasword: e.target.value })
+                setUsers({ ...users, confirmPassword: e.target.value })
               }
             />
           </div>
           <div className="sign-in-fields">
-            <button>Create</button>
+            <div>About</div>
+            <input
+              type="text"
+              value={users.about}
+              placeholder="Tell me about yourself"
+              onChange={(e) =>
+                setUsers({ ...users, about: e.target.value })
+              }
+            />
+          </div>
+          <div className="sign-in-fields">
+            <button onClick={signUpUser} >Create</button>
           </div>
         </form>
       </div>

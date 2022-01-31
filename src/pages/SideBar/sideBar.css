@@ -1,0 +1,7 @@
+.add-contact-btn {
+    float: right;
+    position: relative;
+    top: -35px;
+    right: 10px;
+    cursor: pointer;
+}

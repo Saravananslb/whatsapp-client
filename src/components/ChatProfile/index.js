@@ -7,7 +7,7 @@ export const ChatProfile = (props) => {
     return (
         <div className={`profile-grid-container ${props.isSelected ? 'selected' : ''}`} onClick={() => props.onSelectChat(props.chatUsers)}>
             <div className="chat-profile-pic">
-                <img src={PROFILE_PIC} alt="profile pic" className="profile-pic"/>
+                <img src={props.chatUsers.profilePic || PROFILE_PIC} alt="profile pic" className="profile-pic"/>
             </div>
             <div className="conversation-msg-view">
                 <div>
