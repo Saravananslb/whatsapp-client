@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useState } from "react/cjs/react.development";
 import { Context } from "../store/Context";
 import { ChatArea } from "./ChatArea";
 import { SideBar } from "./SideBar";
 import { LandChatScreen } from '../components/LandChatScreen';
 import { cookies } from "../services/apiCall";
-import { USER_INFO, IS_AUTHENTICATE, SET_CONTACT, SET_TEMP_CONTACT } from "../store/action.types";
+import { USER_INFO, IS_AUTHENTICATE, SET_CONTACT, SET_TEMP_CONTACT, ADD_CHAT } from "../store/action.types";
 import { validateToken, getContactsUser } from "../services/apiCall";
 import { useNavigate } from "react-router-dom";
 import { b64toBlob } from "../utils/b64toBlob";
@@ -17,7 +17,22 @@ export const Home = () => {
 
     const { state, dispatch } = useContext(Context);
 
+    let wsRef = useRef();
+
     useEffect (async() => {
+        wsRef.current = new WebSocket("ws:\\127.0.0.1:8080");
+
+        console.log(wsRef.current);
+        console.log(state.chats);
+
+        wsRef.current.addEventListener("open", () => {
+        wsRef.current.send(
+            JSON.stringify({
+            senderId: state.user._id,
+            type: "init",
+            })
+        );
+        });
         if (!state.isAuthenticated && cookies.get('Authorization')) {
             const user = await validateToken();
             console.log(user)
@@ -55,6 +70,32 @@ export const Home = () => {
         }
     }, [])
 
+    useEffect(() => {
+        wsRef.current.addEventListener("message", (e) => {
+          let recievedData = JSON.parse(e.data);
+          console.log(state.chats);
+          let existingData = state.chats[recievedData._id]?.message || [];
+          let payload = {
+            [recievedData._id]: {
+              _id: recievedData._id,
+              message: [
+                ...existingData,
+                {
+                  senderId: recievedData.senderId,
+                  recieverId: recievedData.recieverId,
+                  value: recievedData.message,
+                },
+              ],
+            },
+          };
+    
+          dispatch({
+            type: ADD_CHAT,
+            payload: payload,
+          });
+        });
+      }, [state.chats]);
+
     const getUserChats = async(contact) => {
         const chats = await getContactsUser({contact: state.user.contact ? state.user.contact : contact});
         if (chats.status == 200){
@@ -87,7 +128,7 @@ export const Home = () => {
                 </div>
                 <div className="chat-area-container">
                 < AddContactModal />
-                    {state.chatUser._id ? < ChatArea /> : <LandChatScreen />}
+                    {state.chatUser._id ? < ChatArea webSocket={wsRef.current} /> : <LandChatScreen />}
                     
                 </div>
             </div>

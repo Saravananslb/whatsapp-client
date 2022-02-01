@@ -3,6 +3,7 @@ import { Button, Modal} from 'react-bootstrap';
 import { Context } from '../../store/Context';
 import { ENABLE_CONTACT, USER_INFO } from '../../store/action.types';
 import { addContactUser, getUsersList } from '../../services/apiCall';
+import styles from "./modal.module.css";
 
 export const AddContactModal = () => {
 
@@ -39,29 +40,26 @@ export const AddContactModal = () => {
   
     return (
       <>
-  
-        <Modal show={state.contactEnabled} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add Contact</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-          {/* <form action=""> */}
-          <div style={{padding: '10px'}}>
+      {state.contactEnabled ? (
+        <div className={styles.modalBody}>
+          <div className={styles.modalChild}>
+            <div onClick={handleClose} className={styles.modalCloseButton}>
+              x
+            </div>
+            <div style={{padding: '10px'}}>
             <div>Phone Number</div>
             <input type="text" value={number} placeholder="Phone number" onChange={(e) => setNumber(e.target.value)} style={{padding: '10px', width: '350px'}} />
           </div>
-        {/* </form> */}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={addContact}>
-              Add contact
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
+          <button onClick={addContact}> Add Contact</button>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+    </>
+      
     );
   }
+
+
   

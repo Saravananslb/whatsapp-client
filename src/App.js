@@ -21,7 +21,8 @@ function App() {
     isAuthenticated: false,
     contactEnabled: false,
     userContacts: [],
-    userContactsTemp: []
+    userContactsTemp: [],
+    chats: {}
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);

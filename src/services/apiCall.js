@@ -66,8 +66,14 @@ export const getUsersList = async(number) => {
 
 }
 
-export const getUserChats = (userId) => {
-    if (!API_ENABLED) return chats;
+export const getUserChats = async(recieverId) => {
+    // if (!API_ENABLED) return chats;
+    return await axios.get(`/conversation/reciever/${recieverId}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: 'Bearer ' + cookies.get('Authorization')
+        }
+    })
 }
 
 

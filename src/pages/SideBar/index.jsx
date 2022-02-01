@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Profile } from "../../components/Profile";
 import { SearchBar } from "../../components/Search";
 import { ChatProfile } from "../../components/ChatProfile";
-import { getContactsUser, getUserChatList } from "../../services/apiCall";
+import { getContactsUser, getUserChatList, getUserChats } from "../../services/apiCall";
 import { Context } from "../../store/Context";
-import { CHAT_USER, ENABLE_CONTACT } from "../../store/action.types";
+import { CHAT_USER, ENABLE_CONTACT, ADD_CHAT } from "../../store/action.types";
 import { PersonPlus } from 'react-bootstrap-icons';
 import './sideBar.css';
 
@@ -13,8 +13,17 @@ export const SideBar = () => {
 
   const {state, dispatch} = useContext(Context);
 
-  const onSelectChat = (chatUser) => {
-    console.log(chatUser)
+  const onSelectChat = async(chatUser) => {
+    getUserChats(chatUser._id).then((res) => {
+      console.log(res);
+      dispatch({
+        type: ADD_CHAT,
+        payload: {
+          [res.data._id]: res.data,
+        },
+      });
+    });
+    
       dispatch({
           type: CHAT_USER,
           payload: {
@@ -22,7 +31,7 @@ export const SideBar = () => {
           }
       })
   }
-
+  // console.log("chatuser", state.use)
   const addContact = () => {
     dispatch({
       type: ENABLE_CONTACT,

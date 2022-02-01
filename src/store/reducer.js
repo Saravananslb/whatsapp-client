@@ -1,4 +1,4 @@
-import { CHAT_USER, IS_AUTHENTICATE, USER_INFO, ENABLE_CONTACT, SET_TEMP_CONTACT, SET_CONTACT } from "./action.types"
+import { CHAT_USER, IS_AUTHENTICATE, USER_INFO, ENABLE_CONTACT, SET_TEMP_CONTACT, SET_CONTACT, ADD_CHAT } from "./action.types"
 
 export const reducer = (state, action) => {
     switch(action.type) {
@@ -32,6 +32,14 @@ export const reducer = (state, action) => {
                 ...state,
                 userContactsTemp: action.payload.userContactsTemp
             }
+        case ADD_CHAT:
+            return {
+                ...state,
+                chats: {
+                ...state.chats,
+                ...action.payload,
+                },
+            };
         default:
             return state;
     }
