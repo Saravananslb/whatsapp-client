@@ -12,9 +12,9 @@ export const ChatProfile = (props) => {
             <div className="conversation-msg-view">
                 <div>
                     <span className="username-conversation" >{props.chatUsers.name}</span>
-                    <span className="conversation-time" >{formatDate(props.chatUsers.time)}</span>
+                    <span className="conversation-time" >{formatDate(props.chatUsers.lastMessageAt)}</span>
                 </div>
-                <div className="last-conversation">{props.chatUsers.lastChat}</div>
+                <div className="last-conversation">{props.chatUsers.lastMessage}</div>
             </div>
             
         </div>
